@@ -59,8 +59,8 @@ Summarise the invariant philosophy and point to the detailed docs:
 - Tracing stance (placeholder)
 
 ## Local Development and Deployment
-- Toolchain: k3d/kind + Helm
-- Local run steps (link to quickstart when written)
+- Toolchain: kind + Helm
+- [Local run steps](local-postgres.md)
 
 ## Diagrams
 - Container diagram link: <link>
