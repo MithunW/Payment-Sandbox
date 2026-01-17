@@ -25,30 +25,7 @@ What problem are we solving (in sandbox terms)? What is the value of this system
 
 ## Services and Responsibilities (Boundaries)
 Describe each service in 5–10 lines max.
-
-### payments-api
-**Owns:**  
-**Does not own:**  
-**Primary responsibilities:**  
-**Interfaces:** (sync calls/events)
-
-### ledger
-**Owns:**  
-**Does not own:**  
-**Primary responsibilities:**  
-**Interfaces:**
-
-### risk (placeholder)
-**Owns:**  
-**Does not own:**  
-**Primary responsibilities:**  
-**Interfaces:**
-
-### settlement (placeholder)
-**Owns:**  
-**Does not own:**  
-**Primary responsibilities:**  
-**Interfaces:**
+[Service Boundaries](service-boundaries.md)
 
 ## Data Ownership
 - DB-per-service: rationale and ownership map
