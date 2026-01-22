@@ -63,7 +63,7 @@ Summarise the invariant philosophy and point to the detailed docs:
 - [Local run steps](local-postgres.md)
 
 ## Diagrams
-- Container diagram link: <link>
+- [Container Diagram](containers.mmd)
 - Any other diagrams: <links>
 
 ## ADR Index

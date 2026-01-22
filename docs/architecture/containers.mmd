@@ -1,0 +1,53 @@
+flowchart LR
+%% =========================
+%% Payments Sandbox (Simple Container Diagram)
+%% =========================
+
+    subgraph External["External Clients"]
+        Client["Client / Test Harness"]
+    end
+
+    subgraph Svc["Services (Q1 focus)"]
+        PAY["payments-api<br/>(Orchestrator + Public API)"]
+        LED["ledger<br/>(Double-entry system of record)"]
+    end
+
+    subgraph Stores["Data Stores (DB-per-service)"]
+        PAYDB[(payments-db)]
+        LEDDB[(ledger-db)]
+    end
+
+    subgraph Future["Placeholders (Cut in January)"]
+        RISK["risk<br/>(Decisioning)"]
+        RISKDB[(risk-db)]
+        SETTLE["settlement<br/>(Batching + recon)"]
+        SETTLEDB[(settlement-db)]
+        BUS["Event Bus<br/>(Kafka / MSK)<br/>placeholder"]
+    end
+
+%% Ownership (service -> its DB)
+    PAY --> PAYDB
+    LED --> LEDDB
+
+%% Sync (Now)
+    Client -->|HTTPS| PAY
+    PAY -->|HTTP: idempotent POST| LED
+
+%% Async / Future (Later)
+    PAY -.->|Outbox: publish| BUS
+    LED -.->|LedgerEntryPosted| BUS
+    BUS -.-> RISK
+    BUS -.-> SETTLE
+    RISK -.-> RISKDB
+    SETTLE -.-> SETTLEDB
+
+%% Styling
+    classDef cut stroke-dasharray: 6 4,stroke-width:1px;
+    class RISK,RISKDB,SETTLE,SETTLEDB,BUS cut;
+
+%% Legend
+    subgraph Legend["Legend"]
+        L1["Solid lines = January (in scope / sync calls)"]
+        L2["Dashed lines + dashed boxes = Later (cut line placeholders)"]
+        L3["DBs are owned by their service (no cross-service DB access)"]
+    end
