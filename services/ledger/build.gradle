@@ -27,3 +27,8 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+
+tasks.named('bootRun') {
+    mainClass = 'com.example.ledger.LedgerApplication'
+}
