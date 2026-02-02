@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ${LEDGER_DB_URL:jdbc:postgresql://localhost:5432/ledger}
+    username: ${LEDGER_DB_USERNAME:ledger}
+    password: ${LEDGER_DB_PASSWORD:ledgerpw-change-me}
+  jpa:
+    open-in-view: false
+  flyway:
+    enabled: true
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,prometheus"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+logging:
+  level:
+    org.flywaydb: INFO
+    org.springframework.boot.autoconfigure.flyway: DEBUG
+

@@ -1,0 +1,13 @@
+auth:
+  username: ledger
+  password: ledgerpw-change-me
+  database: ledger
+primary:
+  persistence:
+    enabled: false
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+readReplicas:
+  replicaCount: 0
