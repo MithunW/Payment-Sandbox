@@ -24,4 +24,4 @@ postgres-uninstall:
 	kubectl delete namespace $(NAMESPACE) || true
 
 ledger-run:
-	cd services/ledger && ./gradlew bootRun
+	./gradlew -p services/ledger bootRun

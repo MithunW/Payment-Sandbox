@@ -20,3 +20,8 @@ management:
     export:
       prometheus:
         enabled: true
+logging:
+  level:
+    org.flywaydb: INFO
+    org.springframework.boot.autoconfigure.flyway: DEBUG
+
