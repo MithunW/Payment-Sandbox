@@ -1,0 +1,49 @@
+# Default values for ledger chart.
+
+# Number of desired pods.  This chart defaults to a single instance for simplicity,
+# but can be increased to scale out read workloads later.
+replicaCount: 1
+
+# Container image configuration.  Override the repository and tag to point to your
+# built ledger image.  pullPolicy controls when Kubernetes will attempt to
+# re-pull the image.
+image:
+  repository: ledger
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Service configuration.  The ledger service exposes a single HTTP port.  You
+# typically do not need to change the type for development clusters; if you
+# deploy into a cloud provider, you may override to LoadBalancer or use an
+# ingress controller.
+service:
+  type: ClusterIP
+  port: 8080
+
+# Environment variables passed to the ledger container.  These values must
+# match the database credentials and URL for your environment.  In local
+# development, the Postgres service created via Helm lives in the `sandbox`
+# namespace and is accessible via the DNS name shown below.
+env:
+  LEDGER_DB_URL: "jdbc:postgresql://postgres-postgresql.sandbox.svc.cluster.local:5432/ledger"
+  LEDGER_DB_USERNAME: "ledger"
+  LEDGER_DB_PASSWORD: "ledgerpw-change-me"
+
+# Resource requests and limits.  Set these to tune CPU and memory usage.
+resources: {}
+
+# Readiness probe configuration.  The ledger service uses Spring Boot and
+# exposes a minimal HTTP endpoint on `/` which returns a 404 page; this
+# suffices as a basic health check in the absence of Actuator.
+readinessProbe:
+  path: /
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+# Liveness probe configuration.  Using the same path as readiness but with a
+# longer initial delay allows the application time to start up and run
+# Flyway migrations before Kubernetes restarts it.
+livenessProbe:
+  path: /
+  initialDelaySeconds: 20
+  periodSeconds: 20
