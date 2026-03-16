@@ -66,6 +66,33 @@ Summarise the invariant philosophy and point to the detailed docs:
 - [Container Diagram](containers.mmd) https://lucid.app/lucidchart/b961eca6-fbee-4597-8d95-c892b04b1cc8/edit?viewport_loc=-936%2C-1010%2C3182%2C1668%2C0_0&invitationId=inv_34fc3b93-de66-4452-b90f-e1f95a652cbc
 - Any other diagrams: <links>
 
+## Related Documents
+
+- **Service boundaries & data ownership:** [Service Boundaries](service-boundaries.md)
+- **Ledger schema:** [Ledger schema v0](../ledger/schema-v0.md)
+- **Ledger posting contract:** [Posting Contract](../ledger/posting-contract.md)
+- **ADR:** [Ledger model and invariants (ADR-0001)](../adrs/0001-ledger-model-and-invariants.md)
+- **Runbook:** [Ledger posting failures](../runbooks/ledger-posting-failures.md)
+- **Local development:** [Local PostgreSQL on kind](../local-postgres.md)
+
+## ADR Index
+
+- **ADR ‑0001:** Ledger model & invariants (double-entry, immutability, minor units)
+
+## Runbooks Index
+
+- **Ledger posting failures:** [Runbook](../runbooks/ledger-posting-failures.md)
+- **Local K8s troubleshooting:** _placeholder for future docs_
+
+## What’s Next (February preview)
+
+- Implement `payments-api` skeleton with REST endpoints for authorize/capture/refund/chargeback, idempotency, and outbox.
+- Integrate risk stub service returning simple risk decisions.
+- Set up Kafka/MSK integration and publish CloudEvents via the outbox.
+- Extend ledger service to expose a posting API and read models.
+- Begin settlement service design and event consumption patterns.
+
+
 ## ADR Index
 List ADRs with short titles and statuses:
 - ADR-0001: ...
